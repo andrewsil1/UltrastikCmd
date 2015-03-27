@@ -1,0 +1,14 @@
+bin_PROGRAMS = ultrastikcmd
+
+ultrastikcmd_SOURCES = ultrastikcmd.cpp
+
+AM_CPPFLAGS = $(LIBHID_CFLAGS) $(LIBUSB_CFLAGS) $(LIBARGP_CFLAGS)
+
+LDADD = $(LIBHID_LIBS) $(LIBUSB_LIBS) 
+
+if ADDARGP_LIBS
+LDADD += $(LIBARGP_LIBS)
+endif
+
+
+

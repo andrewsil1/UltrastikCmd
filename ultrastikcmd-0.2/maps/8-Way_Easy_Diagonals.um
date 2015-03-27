@@ -1,0 +1,13 @@
+MapFileFormatVersion=1.0
+
+MapSize=9
+MapBorderLocations=30,58,86,114,142,170,198,226
+MapRow1=NW,NW,*,N,N,N,*,NE,NE
+MapRow2=NW,NW,NW,N,N,N,NE,NE,NE
+MapRow3=*,NW,NW,*,N,*,NE,NE,*
+MapRow4=W,W,*,NW,C,NE,*,E,E
+MapRow5=W,W,W,C,C,C,E,E,E
+MapRow6=W,W,*,SW,C,SE,*,E,E
+MapRow7=*,SW,SW,*,S,*,SE,SE,*
+MapRow8=SW,SW,SW,S,S,S,SE,SE,SE
+MapRow9=SW,SW,*,S,S,S,*,SE,SE

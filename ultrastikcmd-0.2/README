@@ -1,0 +1,9 @@
+Tool for writing configs to Ultrastik 360`s from Ultimarc.
+
+This program requires the following:
+
+Linux - libusb, libhid (http://libhid.alioth.debian.org/), libusb-compat, argp
+You must also change the permissions on the relevant /sys/bus/usb entries or run the command as root.
+These libraries are in some cases fairly obsolete, but still available and the app still works.
+
+OS X - libusb (darwin ports), Argp-standalone(darwin ports), libhid (http://libhid.alioth.debian.org/)

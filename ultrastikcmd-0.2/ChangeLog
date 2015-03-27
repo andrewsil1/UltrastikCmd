@@ -1,0 +1,30 @@
+2009-03-13  Aleph  <aleph@al3ph.org>
+
+	* first release
+
+2009-04-02  Aleph  <aleph@al3ph.org>
+
+	* Added maps to distribution
+
+2013-04-19  Aleph  <aleph@al3ph.org>
+
+	* Fixed segfault with usb_control_msg
+	* Applied patch from Christopher Becker, supports rebinding of js0 etc., cheers Christopher!
+
+2015-03-26 Andy (andrewsi@outlook.com)
+
+	* Enabled application to work with newer Ultrastiks with Product IDs in the 051x range, 
+          rather than 050x.
+	* The newer sticks receive the information via a different USB mechanism than the
+          earlier sticks (USB HID Output Report)
+	* When sending a map, default border locations are applied if none are supplied by the
+	  selected map file. The stick doesn't seem to like receiving all zeroes for border
+          locations, not surprisingly.
+	* Added a warning message when changing the stick ID - the stick must be physically 
+	  disconnected before it will be recognized with the new identifier.
+	* In the "old" transfer method, USB error checking has been added and appropriate 
+          error output included.
+	* Updated to revision 0.2
+	* Ideally, this version should be deprecated and make use of newer USB libraries, but
+          that's for another day.
+	* Many thanks to Andy at Ultimark, and Aleph for a few words of encouragement.
