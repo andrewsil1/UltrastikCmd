@@ -73,6 +73,7 @@ static struct argp_option options[] = {
 
 /* Enum for keeping track of stick type found */
 enum Stiktype {NEW, OLD};
+Stiktype stikfound = NEW;     // BECKER
 
 /* Used by main to communicate with parse_opt. */
 struct arguments {
@@ -300,16 +301,29 @@ void hid_out_report(HIDInterface* hid, char packet[], bool verbose) {
 	// These magic numbers are constructed from the "lsusb -v" HID descriptor parse report, and the technique
 	// for constructing the path is in the libhid_test.c sample from the API. (Usage #'s and Usage Page #'s)
 
-	int ret = hid_set_output_report(hid, PATH_OUT, PATHLEN, packet, SEND_PACKET_LEN);
-	if (ret != HID_RET_SUCCESS) {
-		fprintf(stderr, "hid_set_output_report failed with return code %d\n", ret);
-	} else if (verbose) {
-			fprintf(stderr, "Sent: ");
-			for (int i=0; i < 4; i++) {
-			 	fprintf(stderr, "0x%02x ",packet[i]);
-			}
-			fprintf(stderr,"\n");
-	}
+    // BECKER: force retry on set report failure (return code 19)...
+    bool retry = true;
+    while (retry){
+
+    	int ret = hid_set_output_report(hid, PATH_OUT, PATHLEN, packet, SEND_PACKET_LEN);
+    	if (ret != HID_RET_SUCCESS) {
+            if (ret != HID_RET_FAIL_SET_REPORT){
+                retry = false;
+    		    fprintf(stderr, "hid_set_output_report failed with return code %d\n", ret);
+            }
+
+        // success...
+    	} else {
+            retry = false;
+            if (verbose) {
+        		fprintf(stderr, "Sent: ");
+        		for (int i=0; i < 4; i++) {
+        		 	fprintf(stderr, "0x%02x ",packet[i]);
+        		}
+        		fprintf(stderr,"\n");
+        	}
+        }
+    }
 }
 
 
@@ -326,7 +340,7 @@ int main(int argc, char **argv) {
 
 	struct arguments arguments;
 
-	Stiktype stikfound;
+	//Stiktype stikfound; // BECKER
 
     /* Default values. */
 	arguments.silent = 0;
@@ -581,7 +595,8 @@ int bind_usb(std::string &fname1, int &iVerbose){
 		rc = 1;
 
 	} else {
-		usb_ioctl.ifno = 2;
+		(stikfound == OLD) ? usb_ioctl.ifno = 0 : usb_ioctl.ifno = 2;    // BECKER    
+		//usb_ioctl.ifno = 2;                                               //
 		usb_ioctl.ioctl_code = USBDEVFS_CONNECT;
 		usb_ioctl.data = NULL;
 
