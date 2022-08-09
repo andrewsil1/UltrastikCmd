@@ -235,25 +235,6 @@ sub save_file {
 	my ($path) = @_;
 }
 
-sub update_map 
+sub update_map {
 	my ($map) = @_;
-	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
